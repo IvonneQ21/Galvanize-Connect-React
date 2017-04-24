@@ -1,8 +1,28 @@
 
-import React from 'react'
-import { Button, Checkbox, Form } from 'semantic-ui-react'
+import React from 'react';
 
-const LogInForm = () => (
+import { Button, Checkbox, Form } from 'semantic-ui-react';
+
+// const LogInForm = () => (
+//   <Form>
+//     <Form>
+//       <label>First Name</label>
+//       <input placeholder='First Name' />
+//     </Form>
+//     <Form>
+//       <label>Last Name</label>
+//       <input placeholder='Last Name' />
+//     </Form>
+//     <Form>
+//       <Checkbox label='I agree to the Terms and Conditions' />
+//     </Form>
+//     <Button type='submit'>Submit</Button>
+//   </Form>
+// )
+//
+// export default LogInForm
+const LogInForm = () => {
+  return(
   <Form>
     <Form.Field>
       <label>First Name</label>
@@ -18,5 +38,6 @@ const LogInForm = () => (
     <Button type='submit'>Submit</Button>
   </Form>
 )
+}
 
 export default LogInForm
