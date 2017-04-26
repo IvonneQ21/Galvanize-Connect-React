@@ -27,5 +27,16 @@ const loginRequest = () => {
 
 //ACTION CREATORS
 export const login = (props) => {
-    return {type: 'LOGIN', payload: loginRequest()}
+    return {
+          type: 'LOGIN',
+          payload: loginRequest()}
+}
+
+
+
+export const addProject = (project) => {
+  return {
+          type:'ADD_PROJECT',
+          payload: project
+          }
 }
