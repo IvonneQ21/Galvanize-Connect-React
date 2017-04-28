@@ -5,19 +5,26 @@ import './projectform.css';
 import { bindActionCreators } from 'redux';
 import { addProject } from '../../actions';
 import { connect } from 'react-redux';
+
+
+
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators( { addProject } ,dispatch)
+  return bindActionCreators( { addProject }, dispatch)
 }
 
-function mapStateToProps({projects}){
+
+
+function mapStateToProps({ GoogleAuth, projects, form}){
   return {
-    projects
+    GoogleAuth,
+    projects,
+    form
   }
 }
 
 class AddProjectForm extends Component {
   render(){
-    const {handleSubmit} = this.props
+    const { GoogleAuth, addProject, handleSubmit, form} = this.props;
    return (
 
     //  <Form className="form" >
@@ -30,7 +37,7 @@ class AddProjectForm extends Component {
     //     <Form.Field className="proDesc"control={TextArea} label='About' placeholder='Tell us more about your project...' />
     //     <Form.Field control={Button}>Submit</Form.Field>
     //   </Form>
-      <form onSubmit={handleSubmit(this.props.addProject)}>
+      <form>
         <div>
           <label htmlFor="projectName">Project Name</label>
           <Field name="projectName" component="input" type="text"/>
@@ -39,7 +46,7 @@ class AddProjectForm extends Component {
           <label htmlFor="description">Project Description</label>
           <Field className="proDesc" name="description" component="input" type="text"/>
         </div>
-        <button type="submit">Submit</button>
+        <button type="submit" onClick={(e) => {e.preventDefault(); addProject(GoogleAuth, form)}}>Submit</button>
       </form>
     );
   }
@@ -50,4 +57,6 @@ AddProjectForm = reduxForm({
 
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddProjectForm);
+export default connect(mapStateToProps, mapDispatchToProps)(reduxForm({
+  form: 'AddProjectForm',
+})(AddProjectForm))

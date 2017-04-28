@@ -31,6 +31,11 @@ const getJobsRequest = () => {
     return axios.get('http://service.dice.com/api/rest/jobsearch/v1/simple.json?text=javascript&city=94102&pgcnt=20').then((res) => res.data.resultItemList)
 }
 
+// const addProjectToFireDB = (postProjects) => {
+//   let addProjectInFireBase =firebase.database().ref(`/user/${displayName}`).push();
+//    addProjectInFireBase.set(postProjects);
+// }
+
 // const postResult = (post) => {
 //   const postObject = {
 //    post: post.post,
@@ -51,27 +56,27 @@ export const addInfoToPost = (...info) => {
   console.log('post info !!!!!', postInfo);
   return postInfo;
 }
-// export const addProjectToUser = (...project) => {
-//   console.log('adding info yo', info[0], info[1]['object Object'].values.post);
-//   const postInfo = {
-//     post: info[1]['object Object'].values.post,
-//     name:info[0].userData.displayName,
-//     time: new Date(),
-//     comments: [],
-//     photoURL:info[0].userData.photoURL
-//   }
-//   console.log('post info !!!!!', postInfo);
-//   return postInfo;
-// }
 
+export const addProjectToUser = (GoogleAuth, form) => {
+  // console.log(...necessaryInfo);
+  const postFormat = {
+    title: form.object.values.projectName,
+    description: form.object.values.description,
+  }
+  console.log("in addProjectToUser", postFormat);
+  // addProjectToUser(postFormat)
+ return postFormat;
+}
 
 //ACTION CREATORS
 export const login = (props) => {
     return {type: 'LOGIN', payload: loginRequest()}
 }
 
-export const addProject = (project) => {
-    return {type: 'ADD_PROJECT', payload: project}
+export const addProject = (GoogleAuth, form) => {
+      // console.log('project is ====', ...info);
+      // console.log('this.prop is ', this.props);
+    return {type: 'ADD_PROJECT', payload: addProjectToUser(GoogleAuth, form)}
 }
 
 export const addPost = (GoogleAuth, form) => {
