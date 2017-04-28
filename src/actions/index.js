@@ -1,6 +1,8 @@
 //Helper functions
 import firebase from 'firebase';
 import axios from 'axios';
+
+
 const addNonExistingUsers = (userObject) => {
     const {displayName, email, photoURL} = userObject;
     let userInFireBase = firebase.database().ref(`users/${displayName}`);
@@ -49,6 +51,20 @@ export const addInfoToPost = (...info) => {
   console.log('post info !!!!!', postInfo);
   return postInfo;
 }
+// export const addProjectToUser = (...project) => {
+//   console.log('adding info yo', info[0], info[1]['object Object'].values.post);
+//   const postInfo = {
+//     post: info[1]['object Object'].values.post,
+//     name:info[0].userData.displayName,
+//     time: new Date(),
+//     comments: [],
+//     photoURL:info[0].userData.photoURL
+//   }
+//   console.log('post info !!!!!', postInfo);
+//   return postInfo;
+// }
+
+
 //ACTION CREATORS
 export const login = (props) => {
     return {type: 'LOGIN', payload: loginRequest()}
