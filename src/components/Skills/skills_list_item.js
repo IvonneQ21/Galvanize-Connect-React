@@ -3,9 +3,9 @@ import React from 'react';
 import './skill.css';
 import {connect} from 'react-redux';
 
-const mapStateToProps = ({ skills }) => {
+const mapStateToProps = ({ skillsList }) => {
   return {
-    skills
+    skillsList
   }
 }
 

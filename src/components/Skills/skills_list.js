@@ -29,7 +29,7 @@ class SkillsList extends Component {
     super(props)
   }
   componetDidMount(){
-    console.log("IN MOUNT PROFILE", this.props.UserData.name)
+    // console.log("IN MOUNT PROFILE", this.props.UserData.name)
     firebase.database().ref(`users/${this.props.userData.name}/skills`).once("value", (snapshot) => {
       return this.props.fetchSkills(snapshot.val());
     })
@@ -38,7 +38,7 @@ class SkillsList extends Component {
   render(){
     const {skills} = this.props;
     return(
-      <div>
+      <div className="skillFormat">
         {renderSkill(skills)}
       </div>
     );
