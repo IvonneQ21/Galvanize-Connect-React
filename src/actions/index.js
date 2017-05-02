@@ -35,10 +35,11 @@ const getJobsRequest = () => {
 }
 
 
-export const addInfoToPost = (userData, input) => {
+export const addInfoToPost = (userData, form) => {
   const postInfo = {
-    post: input,
+    post: form['object Object'].values.post,
     name: userData.name,
+    time: new Date(),
     comments: [],
     photo: userData.photo
   }
@@ -55,15 +56,17 @@ function addProjectToFireBase(username, project) {
   let userProjectsInFireBase = firebase.database().ref(`users/${username}/projects`).push();
   userProjectsInFireBase.set(project)
 }
-function updateProjectsAndSendToDB(userData, project) {
+function structuredProject(userData, form) {
+  const allProjectValues = form['object Object'].values;
   const username = userData.name;
-  addProjectToFireBase(username, project);
-  return project;
+  addProjectToFireBase(username, allProjectValues);
+  return allProjectValues;
 }
-function updateSkillsAndSendToDB(userData, skill) {
+function structuredSkill(userData, form) {
+  const  givenSkills = form['object Object'].values.skillName;
   const userName = userData.name;
-  addSkillToFireBase(userName, skill);
-  return skill;
+  addSkillToFireBase(userName, givenSkills);
+  return givenSkills;
 }
 
 function addSkillToFireBase(userName, skill){
@@ -76,13 +79,14 @@ export const login = (props) => {
     return {type: 'LOGIN', payload: loginRequest()};
 }
 
-export const addProject = ( userData, project) => {
-    return {type: 'ADD_PROJECT', payload: updateProjectsAndSendToDB(userData, project)};
+export const addProject = ( userData, form) => {
+    return {type: 'ADD_PROJECT', payload: structuredProject(userData,form)};
 }
 
-export const addPost = (userData, input) => {
-    return {type: 'ADD_POST', payload: addInfoToPost(userData, input)};
+export const addPost = (userData, form) => {
+    return {type: 'ADD_POST', payload: structuredProject(userData, form)};
 }
+
 
 export const getJobs = () => {
     return {type: 'GET_JOBS', payload: getJobsRequest()};
@@ -96,8 +100,8 @@ export const fetchProjects = (projects) => {
   return {type: 'FETCH_PROJECTS', payload: restructureFetchedFireBaseObjects(projects)};
 }
 
-export const addSkill = (userData, skill) => {
-  return {type: 'ADD_SKILL', payload: updateSkillsAndSendToDB(userData, skill)};
+export const addSkill = (userData, form) => {
+  return {type: 'ADD_SKILL', payload: structuredSkill(userData, form)};
 }
 
 export const fetchSkills = (skills) => {
